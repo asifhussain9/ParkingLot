@@ -17,7 +17,7 @@ public class Slot {
         this.number = number;
     }
 
-    public void unavailable() {
+    public void block() {
         this.available = false;
     }
 }

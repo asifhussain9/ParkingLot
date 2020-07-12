@@ -13,7 +13,7 @@ public class ParkingLot {
     public Ticket assignSlot(Car car) throws Exception {
         Optional<Slot> slot = slots.getAvailableSlot();
         if(slot.isPresent()){
-            slot.get().unavailable();
+            slot.get().block();
             return new Ticket(car.getNumber(), new Date(), slot.get().getNumber());
         }
         throw new Exception("Unable to assign slot");
