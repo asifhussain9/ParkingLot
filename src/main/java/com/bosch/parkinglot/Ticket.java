@@ -7,6 +7,16 @@ public class Ticket {
     private Date entryTime;
     private int slotNumber;
 
+    public Ticket(String carNumber, Date entryTime, int slotNumber) {
+        this.carNumber = carNumber;
+        this.entryTime = entryTime;
+        this.slotNumber = slotNumber;
+    }
+
+    public int getSlotNumber() {
+        return slotNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -27,13 +37,11 @@ public class Ticket {
         return result;
     }
 
-    public Ticket(String carNumber, Date entryTime, int slotNumber) {
-        this.carNumber = carNumber;
-        this.entryTime = entryTime;
-        this.slotNumber = slotNumber;
-    }
-
     public Date getEntryTime() {
         return this.entryTime;
+    }
+
+    public void setEntryTime(Date entryTime) {
+        this.entryTime = entryTime;
     }
 }

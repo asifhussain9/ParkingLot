@@ -22,4 +22,13 @@ public class ParkingLot {
         }
         throw new Exception("Unable to assign slot");
     }
+
+    public long checkout(Ticket ticket) throws Exception {
+        long hoursPassed = (System.currentTimeMillis() - ticket.getEntryTime().getTime()) / (1000*60*60);
+        slots.freeSlot(ticket.getSlotNumber());
+        if (hoursPassed == 0){
+            return 10l;
+        }
+        return hoursPassed*10;
+    }
 }

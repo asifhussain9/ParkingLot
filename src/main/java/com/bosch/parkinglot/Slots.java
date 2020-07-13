@@ -20,4 +20,13 @@ public class Slots {
         Collections.sort(slots);
         return slots.stream().filter(Slot::isAvailable).findFirst();
     }
+
+    public void freeSlot(int slotNumber) throws Exception {
+        Optional<Slot> bookedSlot = slots.stream().filter(x -> x.getNumber() == slotNumber).findFirst();
+        if (bookedSlot.isPresent()) {
+            bookedSlot.get().free();
+            return;
+        }
+        throw new Exception("slot to be free could not be found");
+    }
 }
