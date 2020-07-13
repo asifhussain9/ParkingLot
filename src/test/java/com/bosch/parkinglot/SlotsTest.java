@@ -11,21 +11,30 @@ import static org.junit.jupiter.api.Assertions.*;
 class SlotsTest {
 
     @Test
+    void shouldInitializeSlotsWithList(){
+        List<Slot> slotList = new ArrayList<>();
+        slotList.add(new Slot(1));
+        Slots slots = new Slots(slotList);
+        ParkingLot parkingLot = new ParkingLot(slots);
+        assertEquals(slots, parkingLot.getSlots());
+    }
+
+    @Test
     void getAvailableSlotShouldNotReturnSlotIfNoSlotIsAssigned() {
         Slots slots = new Slots(null);
         Optional<Slot> allocatedSlots = slots.getAvailableSlot();
         assertFalse(allocatedSlots.isPresent());
     }
-    
+
     @Test
     void getAvailableSlotShouldReturnTheFirstEmptySlot() {
-        List<Slot> slotList = new ArrayList<Slot>();
+        List<Slot> slotList = new ArrayList<>();
         Slot allocatedSlot1 = new Slot(0);
         Slot allocatedSlot2 = new Slot(1);
         allocatedSlot1.block();
         allocatedSlot2.block();
-        Slot freeSlot1 = new Slot(2);
-        Slot freeSlot2 = new Slot(3);
+        Slot freeSlot1 = new Slot(3);
+        Slot freeSlot2 = new Slot(2);
         slotList.add(allocatedSlot1);
         slotList.add(allocatedSlot2);
         slotList.add(freeSlot1);
@@ -35,12 +44,12 @@ class SlotsTest {
         Optional<Slot> allocatedSlots = slots.getAvailableSlot();
 
         assertTrue(allocatedSlots.isPresent());
-        assertEquals(allocatedSlots.get(), freeSlot1);
+        assertEquals(allocatedSlots.get(), freeSlot2);
     }
 
     @Test
     void getAvailableSlotShouldNotReturnAnySlotIfAllSlotIsBlocked() {
-        List<Slot> slotList = new ArrayList<Slot>();
+        List<Slot> slotList = new ArrayList<>();
         Slot allocatedSlot1 = new Slot(0);
         Slot allocatedSlot2 = new Slot(1);
         allocatedSlot1.block();

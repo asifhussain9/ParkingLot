@@ -5,17 +5,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ParkingLotTest {
     private ParkingLot parkingLot;
 
     @BeforeEach
-    public void setup(){
-        List<Slot> slotList = new ArrayList<Slot>();
+    public void setup() {
+        List<Slot> slotList = new ArrayList<>();
         slotList.add(new Slot(1));
         this.parkingLot = new ParkingLot(new Slots(slotList));
     }
@@ -28,12 +27,9 @@ class ParkingLotTest {
 
     @Test
     public void shouldThrowExceptionWhileAddingCarToASlot() throws Exception {
-       parkingLot.assignSlot(new Car("Ka 05 s 0195"));
-        Assertions.assertThrows(Exception.class, () -> {
-            parkingLot.assignSlot(new Car("Ka 05 s 0196"));
-        });
+        parkingLot.assignSlot(new Car("Ka 05 s 0195"));
+        Assertions.assertThrows(Exception.class, () -> parkingLot.assignSlot(new Car("Ka 05 s 0196")));
     }
-
 
 
 }

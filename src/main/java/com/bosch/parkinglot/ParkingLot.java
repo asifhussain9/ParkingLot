@@ -10,9 +10,13 @@ public class ParkingLot {
         this.slots = slots;
     }
 
+    public Slots getSlots() {
+        return slots;
+    }
+
     public Ticket assignSlot(Car car) throws Exception {
         Optional<Slot> slot = slots.getAvailableSlot();
-        if(slot.isPresent()){
+        if (slot.isPresent()) {
             slot.get().block();
             return new Ticket(car.getNumber(), new Date(), slot.get().getNumber());
         }

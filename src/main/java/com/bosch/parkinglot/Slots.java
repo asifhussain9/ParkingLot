@@ -1,6 +1,7 @@
 package com.bosch.parkinglot;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +17,7 @@ public class Slots {
     }
 
     public Optional<Slot> getAvailableSlot() {
+        Collections.sort(slots);
         return slots.stream().filter(Slot::isAvailable).findFirst();
     }
 }

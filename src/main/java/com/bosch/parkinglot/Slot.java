@@ -1,6 +1,6 @@
 package com.bosch.parkinglot;
 
-public class Slot {
+public class Slot implements Comparable<Slot> {
     private boolean available;
     private int number;
 
@@ -19,5 +19,14 @@ public class Slot {
 
     public void block() {
         this.available = false;
+    }
+
+    public void free() {
+        this.available = true;
+    }
+
+    @Override
+    public int compareTo(Slot o) {
+        return Integer.compare(this.getNumber(), o.getNumber());
     }
 }
