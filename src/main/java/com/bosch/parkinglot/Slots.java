@@ -1,9 +1,7 @@
 package com.bosch.parkinglot;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Slots {
     private List<Slot> slots;
@@ -16,9 +14,13 @@ public class Slots {
         this.slots = slots;
     }
 
-    public Optional<Slot> getAvailableSlot() {
-        Collections.sort(slots);
-        return slots.stream().filter(Slot::isAvailable).findFirst();
+    public List<Slot> getSlots() {
+        return slots;
+    }
+
+    public Optional<Slot> getAvailableSlot(VehicleEnum vehicle) {
+        List<Slot> slotList = slots.stream().filter(x -> x.getFloor().getDesignatedVehicle().equals(vehicle)).collect(Collectors.toList());
+        return slotList.stream().filter(Slot::isAvailable).min(Comparator.comparing(Slot::getNumber));
     }
 
     public void freeSlot(int slotNumber) throws Exception {
@@ -29,4 +31,5 @@ public class Slots {
         }
         throw new Exception("slot to be free could not be found");
     }
+
 }

@@ -8,13 +8,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class SlotTest {
     @Test
     public void shouldBlockSlot() {
-        Slot slot = new Slot(1);
+        Slot slot = new Slot(1, new Floor(0, VehicleEnum.CAR));
         slot.block();
         assertFalse(slot.isAvailable());
     }
 
     public void shouldFreeSlot() {
-        Slot slot = new Slot(1);
+        Slot slot = new Slot(1, new Floor(0, VehicleEnum.CAR));
         slot.block();
         slot.free();
         assertTrue(slot.isAvailable());
